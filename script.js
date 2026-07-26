@@ -27,6 +27,7 @@ document.addEventListener("focusin", function(event){
     speechSynthesis.cancel();
 
     let elemento = event.target;
+    const tabIndexAtual = document.activeElement.tabIndex;
 
     let texto = "";
 
@@ -64,6 +65,13 @@ document.addEventListener("focusin", function(event){
             texto = "Botão. " + elemento.innerText;
             break;
 
+        case "DIV":
+
+            if (tabIndexAtual == "13"){
+               texto = "Leitor de Libras. ";
+               break;
+            }
+
         case "A":
 
             texto = "Link. " + elemento.innerText;
@@ -75,9 +83,11 @@ document.addEventListener("focusin", function(event){
                 "label[for='" + elemento.id + "']"
             );
 
-            texto = label ?
-                "Campo " + label.innerText :
-                "Campo de texto";
+            if (label) {
+                texto = "Campo " + label.innerText;
+            } else {
+                texto = "Campo de texto";
+            }
 
             break;
 
@@ -154,7 +164,6 @@ document.getElementById("contraste").onclick = function () {
     // Adiciona ou remove a classe "altoContraste"
     // sempre que o botão for pressionado.
     document.body.classList.toggle("altoContraste");
-
 };
 
 
@@ -168,7 +177,6 @@ document.getElementById("escuro").onclick = function () {
     // Adiciona ou remove a classe "dark",
     // alterando as cores da página.
     document.body.classList.toggle("dark");
-
 };
 
 /* ==========================================
@@ -183,18 +191,54 @@ function lerPagina() {
 
     // Seleciona os elementos que normalmente contêm texto
     const elementos = document.querySelectorAll(
-        "h1, h2, h3, h4, h5, h6, p, nav, li, footer, img, alt, label, figcaption, blockquote"
+        "h1, h2, h3, h4, h5, h6, p, footer, button, div"
     );
 
     let textoCompleto = "";
+    let tipo = "";
 
     // Junta todos os textos em uma única string
     elementos.forEach(function(elemento){
 
-        const texto = elemento.innerText.trim();
+        let texto = elemento.innerText.trim();
+
+        switch(elemento.tagName){
+
+            case "H1":
+                tipo = "Título principal ";
+                break;
+
+            case "H2":
+                tipo = "Título ";
+                break;
+
+            case "P":
+                tipo = "Parágrafo ";
+                break;
+
+            case "BUTTON":
+                tipo = "Botão ";
+                break;
+
+            case "FOOTER":
+
+                tipo = "Rodapé da página ";
+                break;
+
+            case "DIV":
+
+            if (elemento.className == "Libras"){
+               tipo = "Elemento ";
+               texto = "Leitor de Libras ";
+               break;
+            }
+
+            default:
+                tipo = "Elemento ";
+        }
 
         if(texto !== ""){
-            textoCompleto += texto + ". ";
+            textoCompleto += tipo + texto + ". ";
         }
 
     });
@@ -213,7 +257,11 @@ function lerPagina() {
 
 // Para interromper a leitura
 function pararLeitura(){
-
     speechSynthesis.cancel();
+}
 
+// Função JavaScript que recebe a URL e altera o src da imagem
+function trocarImagem(urlNova) {
+    const imagemnova=document.getElementById('imagemPrincipal');
+    imagemnova.src = urlNova;
 }
