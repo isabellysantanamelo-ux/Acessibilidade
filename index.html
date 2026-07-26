@@ -11,8 +11,6 @@
 <body>
 <header>
     <h1 tabindex="1">Computação Inclusiva</h1>
-</header>
-
 <nav>
  <!-- Botão para aumentar o tamanho da fonte. -->
    <button id="fonteMais" tabindex="2">
@@ -28,7 +26,8 @@
     <button id="contraste" tabindex="4">
         Alto Contraste
     </button>
- <!-- Botão que altera a página para o modo escuro para -- >
+
+ <!-- Botão que altera a página para o modo escuro para -->
    <button id="escuro" tabindex="5">
         Modo Escuro
     </button>
@@ -41,31 +40,60 @@
 
 </nav>
 
+</header>
+
 <main>
+
+<!-- Coluna da Esquerda -->
+<section class="lado-esquerdo">
+<section class="coluna">
     <h2 tabindex="8">O que é Acessibilidade?</h2>
     <p id="texto" tabindex="9">
         A acessibilidade digital permite que qualquer
         pessoa utilize sistemas computacionais
         independentemente de suas limitações.
     </p>
-    <img src="acessibilidade.png" alt="Pessoa utilizando computador com tecnologia assistiva" tabindex="10">
+    <img id="imagemPrincipal" src="acessibilidade.png" alt="Pessoa utilizando computador com tecnologia assistiva" tabindex="10">
     <figcaption tabindex="11">
 <p>        Figura 1 - Pessoa utilizando computador com tecnologia assistiva.</p>
     </figcaption>
+
+</section>
+</section>
+
+<!-- Coluna da Direita -->
+<section class="lado-direito">
+<section class="coluna">
+    <div class="container-cards">
+                <div class="card" onclick="trocarImagem('café.png')">Flashcard 1</div>
+                <div class="card">Flashcard 2</div>
+                <div class="card">Flashcard 3</div>
+                <div class="card">Flashcard 4</div>
+                <div class="card">Flashcard 5</div>
+                <div class="card">Flashcard 6</div>
+                <div class="card">Flashcard 7</div>
+                <div class="card">Flashcard 8</div>
+                <div class="card">Flashcard 9</div>
+    </div>
+</section>
+</section>
+
 </main>
 
 <footer tabindex="12">
     Desenvolvido na Aula de Programação Web.
 </footer>
 
-<script src="script.js"></script>
-
-  <div vw class="enabled">
+  <div class="Libras">
+  <div vw class="enabled" tabindex="13">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>
       <div class="vw-plugin-top-wrapper"></div>
     </div>
   </div>
+  </div>
+
+  <script src="script.js"></script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
