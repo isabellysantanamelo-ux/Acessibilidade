@@ -10,8 +10,9 @@ body{
     margin:0;
     /* Remove as margens externas padrão do navegador. */
 
-    background:#F5F5F5;
+     background:#F5F5F5;
     /* Define uma cor de fundo cinza bem clara para a página. */
+
 
     color:#222;
     /* Define a cor padrão dos textos como cinza escuro. */
@@ -32,6 +33,9 @@ body{
    ========================== */
 
 header{
+    display:flex;                  /* Coloca os elementos na mesma linha */
+    justify-content:space-between; /* Título à esquerda e botões à direita */
+    align-items:center;            /* Alinha verticalmente */
 
     background:#1565C0;
     /* Cor azul do fundo do cabeçalho. */
@@ -39,12 +43,17 @@ header{
     color:white;
     /* Define a cor do texto como branco. */
 
-    padding:20px;
-    /* Adiciona um espaçamento interno de 20 pixels
+    padding:10px;
+    /* Adiciona um espaçamento interno de 10 pixels
        em todos os lados. */
 
     text-align:center;
     /* Centraliza o título dentro do cabeçalho. */
+
+    transition:.3s;
+    /* Cria uma animação suave de 0,3 segundos sempre que
+       alguma propriedade visual for alterada, como cores
+       no modo escuro ou alto contraste. */
 
 }
 
@@ -135,15 +144,16 @@ button:focus{
 
 main{
 
-    max-width:900px;
-    /* Limita a largura máxima do conteúdo em 900 pixels,
-       melhorando a legibilidade. */
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:30px;
+
+    width:100%;
+    max-width:1200px;
 
     margin:auto;
-    /* Centraliza o conteúdo horizontalmente. */
-
     padding:20px;
-    /* Adiciona espaçamento interno ao conteúdo. */
 
 }
 
@@ -151,23 +161,16 @@ main{
    IMAGENS
    ========================== */
 
-img{
-
+img, figcaption {
     width:100%;
     /* Faz a imagem ocupar toda a largura disponível
        do elemento pai. */
-
     max-width:500px;
     /* Limita a largura máxima da imagem em 500 pixels,
        evitando que fique muito grande em telas largas. */
-
     display:block;
     /* Faz a imagem comportar-se como elemento de bloco,
        permitindo centralização com margin:auto. */
-
-    margin:auto;
-    /* Centraliza a imagem horizontalmente. */
-
 }
 
 /* ==========================
@@ -231,5 +234,144 @@ footer{
     background:#444;
     /* Altera a cor dos botões para um tom de cinza escuro,
        mantendo a harmonia com o modo escuro. */
+
+}
+
+/* ===========================
+   GRID DOS FLASHCARDS
+=========================== */
+
+.container-cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    width:100%;
+}
+
+/* ===========================
+   FLASHCARD
+=========================== */
+
+.card{
+    background:#4CAF50;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100px;
+    width:100px;
+    border-radius:12px;
+    font-size:1.2rem;
+    transition:.3s;
+    cursor:pointer;
+    padding: 30px;
+    width:100%;
+    min-height:120px;
+    padding:15px;
+    box-sizing:border-box;
+}
+
+.card:hover{
+    transform:scale(1.05);
+}
+
+/* ===========================
+   LADO ESQUERDO
+=========================== */
+
+.lado-esquerdo,
+.lado-direito{
+
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+
+    padding:10px;
+
+}
+
+.coluna{
+
+    width:100%;
+
+}
+
+@media (max-width:900px){
+
+    header{
+
+        flex-direction:column;
+        gap:15px;
+
+    }
+
+    nav{
+
+        justify-content:center;
+
+    }
+
+    main{
+
+        flex-direction:column;
+
+    }
+
+    .lado-esquerdo,
+    .lado-direito{
+
+        width:100%;
+
+    }
+
+}
+
+@media (max-width:600px){
+
+    body{
+
+        font-size:16px;
+
+    }
+
+    header{
+
+        padding:15px;
+
+    }
+
+    nav{
+
+        width:100%;
+        gap:8px;
+
+    }
+
+    button{
+
+        width:100%;
+        font-size:16px;
+
+    }
+
+    .container-cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .card{
+
+        min-height:80px;
+
+    }
+
+    img{
+
+        max-width:100%;
+
+    }
 
 }
