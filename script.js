@@ -67,7 +67,7 @@ document.addEventListener("focusin", function(event){
 
         case "DIV":
 
-            if (tabIndexAtual == "13"){
+            if (tabIndexAtual == "23"){
                texto = "Leitor de Libras. ";
                break;
             }
@@ -88,18 +88,6 @@ document.addEventListener("focusin", function(event){
             } else {
                 texto = "Campo de texto";
             }
-
-            break;
-
-        case "TEXTAREA":
-
-            let legenda = document.querySelector(
-                "label[for='" + elemento.id + "']"
-            );
-
-            texto = legenda ?
-                "Área de texto " + legenda.innerText :
-                "Área de texto";
 
             break;
 
@@ -227,11 +215,12 @@ function lerPagina() {
 
             case "DIV":
 
-            if (elemento.className == "Libras"){
-               tipo = "Elemento ";
-               texto = "Leitor de Libras ";
+               if (elemento.className == "Libras"){
+                  tipo = "Elemento ";
+                  texto = "Leitor de Libras ";
+               }
+
                break;
-            }
 
             default:
                 tipo = "Elemento ";
@@ -261,7 +250,56 @@ function pararLeitura(){
 }
 
 // Função JavaScript que recebe a URL e altera o src da imagem
-function trocarImagem(urlNova) {
+function trocarImagem(escolha) {
+    if (event.type === 'click' || event.key === 'Enter') {
     const imagemnova=document.getElementById('imagemPrincipal');
+    switch(escolha){
+        case "1":
+          urlNova = 'café.png';
+          textoprincipal.innerText="Como explicar o Sol?";
+          texto.innerText="O Sol é uma estrela gigante feita de gás quente que fica no centro do nosso Sistema Solar, a 150 milhões de quilômetros da Terra. Ele dá luz e calor ao nosso planeta, controla a gravidade que segura os planetas ao seu redor e é essencial para a existência de toda a vida.";
+          descrevefigura.innerText="Imagem do Sol na cor amarela ";
+          break;
+        case "2":
+          urlNova = 'cordosol.jfif';
+          textoprincipal.innerText="A verdadeira cor do SOL ";
+          texto.innerText="O Sol visto a olho nu no espaço é na verdade branco. A coloração amarela que vemos aqui na superfície da Terra é por causa da atmosfera da Terra.";
+          descrevefigura.innerText="Imagem do Sol na cor branca ";
+          break;
+        default:
+          urlNova = 'acessibilidade.png';
+          textoprincipal.innerText="O que é Acessibilidade?";
+          texto.innerText="        A acessibilidade digital permite que qualquer        pessoa utilize sistemas computacionais        independentemente de suas limitações.";
+          descrevefigura.innerText="Figura 1 - Pessoa utilizando computador com tecnologia assistiva. ";
+          break;
+        }
     imagemnova.src = urlNova;
+    lerCartao(textoprincipal.innerText, texto.innerText, descrevefigura.innerText);
+    document.getElementById('textoprincipal').focus();
+    }
+}
+
+
+/* ==========================================
+   LEITURA DOS ELEMENTOS DO FLASHCARD ESCOLHIDO
+   ========================================== */
+
+// Função para ler toda a página
+function lerCartao(texto1, texto2, texto3) {
+
+    // Interrompe qualquer leitura anterior
+    speechSynthesis.cancel();
+
+    let textoCompleto = texto1 + ". " + texto2 + ". " + texto3;
+
+    // Cria o objeto de fala
+    const fala = new SpeechSynthesisUtterance(textoCompleto);
+
+    fala.lang = "pt-BR";
+    fala.rate = 1;     // velocidade
+    fala.pitch = 1;    // tom
+    fala.volume = 1;   // volume
+
+    // Inicia a leitura
+    speechSynthesis.speak(fala);
 }
