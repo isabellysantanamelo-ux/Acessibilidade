@@ -205,6 +205,7 @@ footer{
 .altoContraste button{
 
     background:yellow;
+    background-color:yellow;
     /* Botões ficam amarelos para maior destaque. */
 
     color:black;
@@ -220,6 +221,7 @@ footer{
 .dark{
 
     background:#222;
+    background-color:#222;
     /* Define um fundo cinza escuro para reduzir
        o brilho da tela. */
 
@@ -251,28 +253,78 @@ footer{
 /* ===========================
    FLASHCARD
 =========================== */
+/* ===========================
+   FLASHCARD COM EFEITO FLIP
+=========================== */
 
-.card{
-    background:#4CAF50;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100px;
-    width:100px;
-    border-radius:12px;
-    font-size:1.2rem;
-    transition:.3s;
-    cursor:pointer;
-    padding: 30px;
+.flashcard{
+
+    perspective:1000px;
     width:100%;
     min-height:120px;
-    padding:15px;
-    box-sizing:border-box;
+    cursor:pointer;
+
 }
 
-.card:hover{
-    transform:scale(1.05);
+.flashcard .card{
+
+    position:relative;
+
+    width:100%;
+    height:120px;
+
+    transform-style:preserve-3d;
+
+    transition:transform .7s;
+
+}
+
+.flashcard:hover .card{
+
+    transform:rotateY(180deg);
+
+}
+
+.frente,
+.verso{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:12px;
+
+    font-size:1.2rem;
+
+    color:white;
+
+    backface-visibility:hidden;
+
+    box-sizing:border-box;
+
+    padding:15px;
+
+}
+
+.frente{
+
+    background:#4CAF50;
+
+}
+
+.verso{
+
+    background:#b4b215;
+
+    transform:rotateY(180deg);
+
 }
 
 /* ===========================
